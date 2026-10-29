@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo cáo - BeautyPrice Intelligence</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="baocao.css">
+</head>
+<body>
+
+    <!-- =====================================================
+         SIDEBAR (Đồng bộ với Dashboard)
+         ===================================================== -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">✦</div>
+            <div>
+                <h2>BeautyPrice</h2>
+                <span>INTELLIGENCE</span>
+            </div>
+        </div>
+
+        <nav class="menu">
+            <a href="dashboard.html" class="menu-item">
+                <span>▣</span>
+                Tổng quan
+            </a>
+
+            <a href="phankhuc.html" class="menu-item">
+                <span>◉</span>
+                Phân khúc
+            </a>
+
+            <a href="dudoan.html" class="menu-item">
+                <span>◈</span>
+                Dự đoán
+            </a>
+
+            <a href="tracuu.html" class="menu-item">
+                <span>⌕</span>
+                Tra cứu dữ liệu
+            </a>
+
+            <a href="baocao.html" class="menu-item active">
+                <span>▤</span>
+                Báo cáo
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="user-box">
+                <div class="avatar" id="userAvatar">?</div>
+                <div>
+                    <strong id="userRole">Đang tải...</strong>
+                    <small id="userRoleText">Đang tải...</small>
+                </div>
+            </div>
+
+            <button type="button" class="logout-btn" onclick="logout()">
+                <span>↪</span>
+                Đăng xuất
+            </button>
+        </div>
+
+    </aside>
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+    <main class="main">
+
+        <header class="header">
+            <div>
+                <h1>Báo cáo thống kê</h1>
+                <p>Tổng hợp và phân tích dữ liệu sản phẩm mỹ phẩm.</p>
+            </div>
+
+            <div class="header-actions" style="display: flex; gap: 10px;">
+                <button class="btn btn-outline" onclick="printReport()" style="padding: 10px 16px; border: 1px solid #dedbe9; background: #fff; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    🖨 In báo cáo
+                </button>
+                <button class="btn btn-primary" onclick="exportCSV()" style="padding: 10px 16px; background: #6c5ce7; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    ↓ Xuất báo cáo
+                </button>
+            </div>
+        </header>
+
+        <section class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-icon">▦</div>
+                <div>
+                    <span>Tổng sản phẩm</span>
+                    <h2 id="totalProducts">-</h2>
+                    <small>Tổng số sản phẩm</small>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon">◉</div>
+                <div>
+                    <span>Thương hiệu</span>
+                    <h2 id="totalBrands">-</h2>
+                    <small>Thương hiệu chuẩn hóa</small>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon">₫</div>
+                <div>
+                    <span>Giá trung bình</span>
+                    <h2 id="averagePrice">-</h2>
+                    <small>Giá hiện tại</small>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon">%</div>
+                <div>
+                    <span>Sản phẩm giảm giá</span>
+                    <h2 id="discountedProducts">-</h2>
+                    <small>Có khuyến mãi</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+                <div>
+                    <h3>Tổng quan dữ liệu</h3>
+                    <p>Các chỉ số chính về mức giá và khuyến mãi.</p>
+                </div>
+            </div>
+
+            <div class="overview-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                <div class="overview-item" style="background: #faf9fc; padding: 15px; border-radius: 10px; border: 1px solid #eee;">
+                    <span style="font-size: 12px; color: #888; display: block; margin-bottom: 5px;">Giá thấp nhất</span>
+                    <strong id="minPrice" style="font-size: 16px; color: #222;">-</strong>
+                </div>
+
+                <div class="overview-item" style="background: #faf9fc; padding: 15px; border-radius: 10px; border: 1px solid #eee;">
+                    <span style="font-size: 12px; color: #888; display: block; margin-bottom: 5px;">Giá trung vị</span>
+                    <strong id="medianPrice" style="font-size: 16px; color: #222;">-</strong>
+                </div>
+
+                <div class="overview-item" style="background: #faf9fc; padding: 15px; border-radius: 10px; border: 1px solid #eee;">
+                    <span style="font-size: 12px; color: #888; display: block; margin-bottom: 5px;">Giá cao nhất</span>
+                    <strong id="maxPrice" style="font-size: 16px; color: #222;">-</strong>
+                </div>
+
+                <div class="overview-item" style="background: #faf9fc; padding: 15px; border-radius: 10px; border: 1px solid #eee;">
+                    <span style="font-size: 12px; color: #888; display: block; margin-bottom: 5px;">Giảm giá trung bình</span>
+                    <strong id="averageDiscount" style="font-size: 16px; color: #222;">-</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+                <div>
+                    <h3>Phân bố theo khoảng giá</h3>
+                    <p>Số lượng sản phẩm theo từng mức giá hiện tại.</p>
+                </div>
+            </div>
+            <div class="price-report-grid" id="priceReport" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;"></div>
+        </section>
+
+        <section class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+                <div>
+                    <h3>Phân bố mức giảm giá</h3>
+                    <p>Tỷ lệ sản phẩm theo mức giảm giá.</p>
+                </div>
+            </div>
+            <div class="discount-report" id="discountReport" style="display: flex; flex-direction: column; gap: 12px;"></div>
+        </section>
+
+        <section class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+                <div>
+                    <h3>Thống kê theo thương hiệu</h3>
+                    <p>Top 10 thương hiệu có nhiều sản phẩm nhất.</p>
+                </div>
+            </div>
+
+            <div class="table-wrapper" style="overflow-x: auto;">
+                <table class="report-table" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #faf9fc; border-bottom: 1px solid #e8e6f0;">
+                            <th style="padding: 12px; text-align: center; font-size: 12px; color: #777;">#</th>
+                            <th style="padding: 12px; text-align: left; font-size: 12px; color: #777;">Thương hiệu</th>
+                            <th style="padding: 12px; text-align: right; font-size: 12px; color: #777;">Số sản phẩm</th>
+                            <th style="padding: 12px; text-align: right; font-size: 12px; color: #777;">Tỷ trọng</th>
+                            <th style="padding: 12px; text-align: right; font-size: 12px; color: #777;">Giá TB</th>
+                            <th style="padding: 12px; text-align: right; font-size: 12px; color: #777;">Giảm giá TB</th>
+                        </tr>
+                    </thead>
+                    <tbody id="brandReportBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+                <div>
+                    <h3>Thống kê đánh giá</h3>
+                    <p>Tổng hợp dữ liệu review của sản phẩm.</p>
+                </div>
+            </div>
+
+            <div class="review-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+                <div class="overview-item" style="background: #faf9fc; padding: 15px; border-radius: 10px; border: 1px solid #eee;">
+                    <span style="font-size: 12px; color: #888; display: block; margin-bottom: 5px;">Tổng lượt đánh giá</span>
+                    <strong id="totalReviews" style="font-size: 18px; color: #222;">-</strong>
+                </div>
+                <div class="overview-item" style="background: #faf9fc; padding: 15px; border-radius: 10px; border: 1px solid #eee;">
+                    <span style="font-size: 12px; color: #888; display: block; margin-bottom: 5px;">Điểm đánh giá TB</span>
+                    <strong id="averageRating" style="font-size: 18px; color: #222;">-</strong>
+                </div>
+                <div class="overview-item" style="background: #faf9fc; padding: 15px; border-radius: 10px; border: 1px solid #eee;">
+                    <span style="font-size: 12px; color: #888; display: block; margin-bottom: 5px;">Đã mua</span>
+                    <strong id="purchasedRate" style="font-size: 18px; color: #222;">-</strong>
+                </div>
+                <div class="overview-item" style="background: #faf9fc; padding: 15px; border-radius: 10px; border: 1px solid #eee;">
+                    <span style="font-size: 12px; color: #888; display: block; margin-bottom: 5px;">Có hình ảnh</span>
+                    <strong id="imageRate" style="font-size: 18px; color: #222;">-</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="card insight-card" style="margin-bottom: 20px;">
+            <div class="card-header">
+                <div>
+                    <h3>Nhận định báo cáo</h3>
+                    <p>Một số điểm nổi bật từ dữ liệu hiện tại.</p>
+                </div>
+            </div>
+            <div class="insight-list" id="reportInsight" style="display: flex; flex-direction: column; gap: 12px;"></div>
+        </section>
+
+        <footer>
+            BeautyPrice Intelligence • <span id="reportDate"></span>
+        </footer>
+
+    </main>
+
+    <!-- Script phân quyền & kiểm tra đăng nhập -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const role = sessionStorage.getItem("beautyprice_role");
+            const loggedIn = sessionStorage.getItem("beautyprice_logged_in");
+
+            if (loggedIn !== "true" || !role) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            const userAvatar = document.getElementById("userAvatar");
+            const userRole = document.getElementById("userRole");
+            const userRoleText = document.getElementById("userRoleText");
+
+            if (role === "admin") {
+                userAvatar.textContent = "A";
+                userRole.textContent = "ADMIN";
+                userRoleText.textContent = "Quản trị viên";
+            } else if (role === "user") {
+                userAvatar.textContent = "U";
+                userRole.textContent = "USER";
+                userRoleText.textContent = "Người dùng";
+            } else {
+                sessionStorage.clear();
+                window.location.href = "login.html";
+            }
+        });
+
+        function logout() {
+            sessionStorage.removeItem("beautyprice_logged_in");
+            sessionStorage.removeItem("beautyprice_role");
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <script src="baocao.js"></script>
+</body>
+</html>

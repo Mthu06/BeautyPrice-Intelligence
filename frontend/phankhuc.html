@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>BeautyPrice Intelligence</title>
+    <link
+        rel="stylesheet"
+        href="phankhuc.css"
+    >
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                ✦
+            </div>
+
+            <div>
+                <h2>BeautyPrice</h2>
+                <span>INTELLIGENCE</span>
+            </div>
+
+        </div>
+
+        <nav class="menu">
+
+            <a
+                href="dashboard.html"
+                class="menu-item"
+            >
+                <span>▣</span>
+                Tổng quan
+            </a>
+
+            <a
+                href="phankhuc.html"
+                class="menu-item active"
+            >
+                <span>◉</span>
+                Phân khúc
+            </a>
+
+            <a
+                href="dudoan.html"
+                class="menu-item"
+            >
+                <span>◈</span>
+                Dự đoán
+            </a>
+
+            <a
+                href="tracuu.html"
+                class="menu-item"
+            >
+                <span>⌕</span>
+                Tra cứu dữ liệu
+            </a>
+
+            <a
+                href="baocao.html"
+                class="menu-item"
+            >
+                <span>▤</span>
+                Báo cáo
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="user-box">
+
+                <div
+                    class="avatar"
+                    id="userAvatar"
+                >
+                    U
+                </div>
+
+                <div>
+
+                    <strong id="userRole">
+                        USER
+                    </strong>
+
+                    <small id="userRoleText">
+                        Người dùng
+                    </small>
+
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                class="logout-btn"
+                onclick="logout()"
+            >
+
+                <span>↪</span>
+
+                Đăng xuất
+
+            </button>
+
+        </div>
+
+    </aside>
+
+    <main class="main-content">
+
+        <header class="page-header">
+
+            <div>
+
+                <h1>
+                    Phân khúc sản phẩm
+                </h1>
+
+                <p>
+                    Phân tích và khám phá các nhóm sản phẩm
+                    dựa trên đặc điểm dữ liệu.
+                </p>
+
+            </div>
+
+        </header>
+
+        <section class="kpi-grid">
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    ◫
+                </div>
+
+                <div>
+
+                    <span>
+                        Tổng sản phẩm
+                    </span>
+
+                    <strong id="totalProducts">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    ◉
+                </div>
+
+                <div>
+
+                    <span>
+                        Số phân khúc
+                    </span>
+
+                    <strong id="totalClusters">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    ★
+                </div>
+
+                <div>
+
+                    <span>
+                        Phân khúc lớn nhất
+                    </span>
+
+                    <strong id="largestCluster">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    %
+                </div>
+
+                <div>
+
+                    <span>
+                        Tỷ trọng lớn nhất
+                    </span>
+
+                    <strong id="largestClusterPercent">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="chart-section">
+
+            <div class="chart-card">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <h2>
+                            Phân bố sản phẩm theo phân khúc
+                        </h2>
+
+                        <p>
+                            Số lượng sản phẩm được phân bổ
+                            vào từng nhóm K-Means.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="chart-container">
+
+                    <canvas
+                        id="clusterChart"
+                    ></canvas>
+
+                </div>
+
+            </div>
+
+            <div class="criteria-card">
+
+                <div class="criteria-header">
+
+                    <div class="criteria-icon">
+                        ⌁
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Tiêu chí phân khúc
+                        </h2>
+
+                        <p>
+                            Các đặc trưng đầu vào của mô hình
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="criteria-list">
+
+                    <div class="criteria-item">
+
+                        <span class="criteria-number">
+                            01
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Thương hiệu
+                            </strong>
+
+                            <p>
+                                Brand
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="criteria-item">
+
+                        <span class="criteria-number">
+                            02
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Loại sản phẩm
+                            </strong>
+
+                            <p>
+                                Product type
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="criteria-item">
+
+                        <span class="criteria-number">
+                            03
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Danh mục chính
+                            </strong>
+
+                            <p>
+                                Primary category
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="criteria-item">
+
+                        <span class="criteria-number">
+                            04
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Nhà bán lẻ
+                            </strong>
+
+                            <p>
+                                Retailer
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="criteria-item">
+
+                        <span class="criteria-number">
+                            05
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Biến thể sản phẩm
+                            </strong>
+
+                            <p>
+                                Product variant
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="criteria-item">
+
+                        <span class="criteria-number">
+                            06
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Đặc điểm quy mô & đóng gói
+                            </strong>
+
+                            <p>
+                                Dung tích, khối lượng,
+                                số lượng gói và combo.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="criteria-item">
+
+                        <span class="criteria-number">
+                            07
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Mức độ tương tác
+                            </strong>
+
+                            <p>
+                                Điểm đánh giá và lượt đánh giá.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="method-box">
+
+                    <span>
+                        Phương pháp
+                    </span>
+
+                    <strong>
+                        K-Means Clustering
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="cluster-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Đặc điểm phân khúc
+                    </h2>
+
+                    <p>
+                        Tóm tắt đặc trưng nổi bật của từng nhóm sản phẩm.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div
+                class="cluster-cards"
+                id="clusterCards"
+            >
+
+            </div>
+
+        </section>
+
+        <section class="product-section">
+
+            <div class="section-heading table-heading">
+
+                <div>
+
+                    <h2>
+                        Danh sách sản phẩm theo phân khúc
+                    </h2>
+
+                    <p id="tableResultInfo">
+                        Đang tải dữ liệu...
+                    </p>
+
+                </div>
+
+                <div class="filter-area">
+
+                    <label for="clusterFilter">
+                        Phân khúc
+                    </label>
+
+                    <select
+                        id="clusterFilter"
+                    >
+
+                        <option value="all">
+                            Tất cả phân khúc
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                STT
+                            </th>
+
+                            <th>
+                                Sản phẩm
+                            </th>
+
+                            <th>
+                                Giá hiện tại
+                            </th>
+
+                            <th>
+                                Phân khúc
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody
+                        id="clusterTableBody"
+                    >
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div
+                class="pagination"
+                id="pagination"
+            >
+
+            </div>
+
+        </section>
+
+        <section class="insight-card">
+
+            <div class="insight-title">
+
+                <div class="insight-icon">
+                    💡
+                </div>
+
+                <div>
+
+                    <h2>
+                        Insight & đề xuất
+                    </h2>
+
+                    <p>
+                        Một số điểm nổi bật được rút ra từ kết quả phân khúc.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div
+                class="insight-list"
+                id="clusterInsight"
+            >
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="phankhuc.js"></script>
+
+</body>
+
+</html>

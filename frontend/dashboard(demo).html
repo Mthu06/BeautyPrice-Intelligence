@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        BeautyPrice Intelligence
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                BP
+            </div>
+
+            <div>
+
+                <h2>
+                    BeautyPrice
+                </h2>
+
+                <span>
+                    INTELLIGENCE
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MENU -->
+
+        <nav class="menu">
+
+    <a
+        href="dashboard.html"
+        class="menu-item active"
+    >
+        <span>▣</span>
+        Tổng quan
+    </a>
+
+
+    <a
+        href="phan-khuc.html"
+        class="menu-item"
+    >
+        <span>◉</span>
+        Phân khúc
+    </a>
+
+
+    <a
+        href="du-doan.html"
+        class="menu-item"
+    >
+        <span>◈</span>
+        Dự đoán
+    </a>
+
+
+    <a
+        href="tracuu.html"
+        class="menu-item"
+    >
+        <span>⌕</span>
+        Tra cứu dữ liệu
+    </a>
+
+
+    <a
+        href="baocao.html"
+        class="menu-item"
+    >
+        <span>▤</span>
+        Báo cáo
+    </a>
+
+</nav>
+
+
+        <!-- =================================================
+             USER + LOGOUT
+        ================================================== -->
+
+        <div class="sidebar-bottom">
+
+
+            <!-- USER -->
+
+            <div class="user-box">
+
+                <div
+                    class="avatar"
+                    id="userAvatar"
+                >
+                    NT
+                </div>
+
+
+                <div class="user-info">
+
+                    <small
+                        id="sidebarUserRole"
+                    >
+                        Administrator
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LOGOUT -->
+
+            <button
+                type="button"
+                class="logout-button"
+                onclick="logout()"
+            >
+
+                ⇥
+                Đăng xuất
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="header">
+
+
+            <div>
+
+                <h1>
+                    Tổng quan thị trường
+                </h1>
+
+                <p>
+                    Phân tích và so sánh giá mỹ phẩm tại Việt Nam
+                </p>
+
+            </div>
+
+
+
+            <div class="header-right">
+
+                <span class="data-status">
+                    ● Dữ liệu mẫu
+                </span>
+
+
+                <span class="date">
+                    19/10/2026
+                </span>
+
+
+                <span
+                    id="headerUserRole"
+                    class="header-user-role"
+                >
+                    Administrator
+                </span>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             FILTER
+        ================================================== -->
+
+        <section class="filter-card">
+
+
+            <div class="filter-title">
+
+                <span>
+                    ⚙
+                </span>
+
+                Bộ lọc dữ liệu
+
+            </div>
+
+
+
+            <div class="filters">
+
+
+                <!-- SOURCE -->
+
+                <div class="filter-group">
+
+                    <label for="sourceFilter">
+                        Nguồn dữ liệu
+                    </label>
+
+
+                    <select id="sourceFilter">
+
+                        <option value="all">
+                            Tất cả nguồn
+                        </option>
+
+                        <option value="Hasaki">
+                            Hasaki
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- BRAND -->
+
+                <div class="filter-group">
+
+                    <label for="brandFilter">
+                        Thương hiệu
+                    </label>
+
+
+                    <select id="brandFilter">
+
+                        <option value="all">
+                            Tất cả thương hiệu
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- PRICE -->
+
+                <div class="filter-group">
+
+                    <label for="priceFilter">
+                        Khoảng giá
+                    </label>
+
+
+                    <select id="priceFilter">
+
+                        <option value="all">
+                            Tất cả mức giá
+                        </option>
+
+                        <option value="under100">
+                            Dưới 100.000đ
+                        </option>
+
+                        <option value="100to300">
+                            100.000đ - 300.000đ
+                        </option>
+
+                        <option value="300to500">
+                            300.000đ - 500.000đ
+                        </option>
+
+                        <option value="over500">
+                            Trên 500.000đ
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DISCOUNT -->
+
+                <div class="filter-group">
+
+                    <label for="discountFilter">
+                        Mức giảm giá
+                    </label>
+
+
+                    <select id="discountFilter">
+
+                        <option value="all">
+                            Tất cả mức giảm
+                        </option>
+
+                        <option value="0">
+                            Không giảm
+                        </option>
+
+                        <option value="1to20">
+                            1% - 20%
+                        </option>
+
+                        <option value="21to40">
+                            21% - 40%
+                        </option>
+
+                        <option value="41to60">
+                            41% - 60%
+                        </option>
+
+                        <option value="over60">
+                            Trên 60%
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- RESET -->
+
+                <button
+                    type="button"
+                    class="reset-filter"
+                    id="resetFilters"
+                >
+
+                    ↻
+                    Đặt lại
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             KPI
+        ================================================== -->
+
+        <section class="kpi-grid">
+
+
+            <!-- TOTAL PRODUCTS -->
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    ◫
+                </div>
+
+
+                <div class="kpi-content">
+
+                    <span>
+                        Tổng sản phẩm
+                    </span>
+
+                    <strong
+                        id="totalProducts"
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TOTAL BRANDS -->
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    ◉
+                </div>
+
+
+                <div class="kpi-content">
+
+                    <span>
+                        Thương hiệu
+                    </span>
+
+                    <strong
+                        id="totalBrands"
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AVERAGE PRICE -->
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    ₫
+                </div>
+
+
+                <div class="kpi-content">
+
+                    <span>
+                        Giá trung bình
+                    </span>
+
+                    <strong
+                        id="averagePrice"
+                    >
+                        0đ
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DISCOUNT -->
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    %
+                </div>
+
+
+                <div class="kpi-content">
+
+                    <span>
+                        Sản phẩm đang giảm
+                    </span>
+
+                    <strong
+                        id="discountedProducts"
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             TOP BRAND + PRICE
+        ================================================== -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- TOP BRAND -->
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Top thương hiệu
+                        </h3>
+
+                        <p>
+                            Số lượng sản phẩm theo thương hiệu
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="brand-list"
+                    id="brandList"
+                >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PRICE -->
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Phân bố mức giá
+                        </h3>
+
+                        <p>
+                            Số lượng sản phẩm theo khoảng giá
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="price-chart">
+
+
+                    <div class="price-column">
+
+                        <div
+                            class="column-value"
+                            data-range="under100"
+                        >
+                            0
+                        </div>
+
+                        <div
+                            class="column"
+                            data-range="under100"
+                        >
+                        </div>
+
+                        <span>
+                            &lt;100K
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="price-column">
+
+                        <div
+                            class="column-value"
+                            data-range="100to300"
+                        >
+                            0
+                        </div>
+
+                        <div
+                            class="column"
+                            data-range="100to300"
+                        >
+                        </div>
+
+                        <span>
+                            100K–300K
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="price-column">
+
+                        <div
+                            class="column-value"
+                            data-range="300to500"
+                        >
+                            0
+                        </div>
+
+                        <div
+                            class="column"
+                            data-range="300to500"
+                        >
+                        </div>
+
+                        <span>
+                            300K–500K
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="price-column">
+
+                        <div
+                            class="column-value"
+                            data-range="over500"
+                        >
+                            0
+                        </div>
+
+                        <div
+                            class="column"
+                            data-range="over500"
+                        >
+                        </div>
+
+                        <span>
+                            &gt;500K
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             DISCOUNT + INSIGHT
+        ================================================== -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- DISCOUNT -->
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Phân bố mức giảm giá
+                        </h3>
+
+                        <p>
+                            Tỷ lệ sản phẩm theo mức giảm
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="discount-list"
+                    id="discountList"
+                >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- INSIGHT -->
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Insight nhanh
+                        </h3>
+
+                        <p>
+                            Một số điểm nổi bật từ dữ liệu
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="insights"
+                    id="insights"
+                >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PHÂN KHÚC
+        ================================================== -->
+
+        <section
+            id="phan-khuc"
+            class="dashboard-card dashboard-placeholder"
+        >
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        Phân khúc thị trường
+                    </h3>
+
+                    <p>
+                        Khu vực hiển thị kết quả phân khúc sản phẩm.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="placeholder-content">
+
+                <span>
+                    ◉
+                </span>
+
+                <p>
+                    Phân khúc sẽ được tích hợp từ kết quả EDA.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             DỰ ĐOÁN
+        ================================================== -->
+
+        <section
+            id="du-doan"
+            class="dashboard-card dashboard-placeholder"
+        >
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        Dự đoán giá
+                    </h3>
+
+                    <p>
+                        Khu vực hiển thị kết quả mô hình Machine Learning.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="placeholder-content">
+
+                <span>
+                    ◈
+                </span>
+
+                <p>
+                    Mô hình dự đoán giá sẽ được tích hợp sau.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             BÁO CÁO
+        ================================================== -->
+
+        <section
+            id="bao-cao"
+            class="dashboard-card dashboard-placeholder"
+        >
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        Báo cáo
+                    </h3>
+
+                    <p>
+                        Khu vực dành cho báo cáo và xuất dữ liệu.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="placeholder-content">
+
+                <span>
+                    ▤
+                </span>
+
+                <p>
+                    Chức năng báo cáo sẽ được tích hợp tại đây.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer class="footer">
+
+            <span>
+                © 2026 BeautyPrice Intelligence
+            </span>
+
+            <span>
+                Phân tích dữ liệu giá mỹ phẩm tại Việt Nam
+            </span>
+
+        </footer>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         AUTH SCRIPT
+    ====================================================== -->
+
+    <script src="auth.js"></script>
+
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            async function () {
+
+
+                /* KIỂM TRA ĐĂNG NHẬP */
+
+                const user =
+                    await checkAuth();
+
+
+                if (!user) {
+
+                    return;
+
+                }
+
+
+                /* AVATAR */
+
+                const userAvatar =
+                    document.getElementById(
+                        "userAvatar"
+                    );
+
+
+                /* SIDEBAR ROLE */
+
+                const sidebarUserRole =
+                    document.getElementById(
+                        "sidebarUserRole"
+                    );
+
+
+                /* HEADER ROLE */
+
+                const headerUserRole =
+                    document.getElementById(
+                        "headerUserRole"
+                    );
+
+
+                /* HIỂN THỊ AVATAR */
+
+                if (userAvatar) {
+
+                    if (
+                        user.role === "admin"
+                    ) {
+
+                        userAvatar.textContent =
+                            "NT";
+
+                    } else {
+
+                        userAvatar.textContent =
+                            "U";
+
+                    }
+
+                }
+
+
+                /* HIỂN THỊ ROLE */
+
+                if (sidebarUserRole) {
+
+                    sidebarUserRole.textContent =
+                        user.display_role;
+
+                }
+
+
+                /* HEADER ROLE */
+
+                if (headerUserRole) {
+
+                    if (
+                        user.role === "admin"
+                    ) {
+
+                        headerUserRole.textContent =
+                            "👑 Administrator";
+
+                    } else {
+
+                        headerUserRole.textContent =
+                            "👤 User";
+
+                    }
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+
+    <!-- =====================================================
+         DASHBOARD SCRIPT
+    ====================================================== -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>

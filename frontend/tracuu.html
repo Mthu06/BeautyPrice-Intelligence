@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BeautyPrice Intelligence</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="tracuu.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">✦</div>
+
+            <div>
+                <h2>BeautyPrice</h2>
+                <span>INTELLIGENCE</span>
+            </div>
+        </div>
+
+        <nav class="menu">
+
+            <a href="dashboard.html" class="menu-item">
+                <span>▣</span>
+                Tổng quan
+            </a>
+
+            <a href="phankhuc.html" class="menu-item">
+                <span>◉</span>
+                Phân khúc
+            </a>
+
+            <a href="dudoan.html" class="menu-item">
+                <span>◈</span>
+                Dự đoán
+            </a>
+
+            <a href="tracuu.html" class="menu-item active">
+                <span>⌕</span>
+                Tra cứu dữ liệu
+            </a>
+
+            <a href="baocao.html" class="menu-item">
+                <span>▤</span>
+                Báo cáo
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="user-box">
+
+                <div class="avatar" id="userAvatar">
+                    ?
+                </div>
+
+                <div>
+                    <strong id="userRole">
+                        Đang tải...
+                    </strong>
+
+                    <small id="userRoleText">
+                        Đang tải...
+                    </small>
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                class="logout-btn"
+                id="logoutBtn"
+            >
+                <span>↪</span>
+                Đăng xuất
+            </button>
+
+        </div>
+
+    </aside>
+
+    <main class="main">
+
+        <header class="page-header">
+
+            <div>
+                <h1>Tra cứu dữ liệu</h1>
+
+                <p>
+                    Tìm kiếm, lọc và quản lý dữ liệu sản phẩm mỹ phẩm
+                </p>
+            </div>
+
+        </header>
+
+        <section class="filter-card">
+
+            <div class="filter-top">
+
+                <strong>
+                    Tìm kiếm &amp; Bộ lọc dữ liệu
+                </strong>
+
+                <button
+                    id="resetBtn"
+                    class="reset-btn"
+                    type="button"
+                >
+                    Đặt lại
+                </button>
+
+            </div>
+
+            <label
+                class="field-label"
+                for="searchInput"
+            >
+                Tìm kiếm từ khóa
+            </label>
+
+            <div class="search-box">
+
+                <span>⌕</span>
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Tìm theo tên sản phẩm, thương hiệu..."
+                >
+
+            </div>
+
+            <div class="filter-grid">
+
+                <div>
+
+                    <label
+                        class="field-label"
+                        for="brandFilter"
+                    >
+                        Thương hiệu
+                    </label>
+
+                    <select id="brandFilter">
+                        <option value="">
+                            Tất cả thương hiệu
+                        </option>
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label
+                        class="field-label"
+                        for="sourceFilter"
+                    >
+                        Nguồn
+                    </label>
+
+                    <select id="sourceFilter">
+
+                        <option value="">
+                            Tất cả nguồn
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label
+                        class="field-label"
+                        for="priceFilter"
+                    >
+                        Khoảng giá
+                    </label>
+
+                    <select id="priceFilter">
+
+                        <option value="">
+                            Tất cả mức giá
+                        </option>
+
+                        <option value="under100">
+                            Dưới 100.000đ
+                        </option>
+
+                        <option value="100to300">
+                            100.000đ - 300.000đ
+                        </option>
+
+                        <option value="300to500">
+                            300.000đ - 500.000đ
+                        </option>
+
+                        <option value="over500">
+                            Trên 500.000đ
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label
+                        class="field-label"
+                        for="discountFilter"
+                    >
+                        Giảm giá
+                    </label>
+
+                    <select id="discountFilter">
+
+                        <option value="">
+                            Tất cả
+                        </option>
+
+                        <option value="0">
+                            0%
+                        </option>
+
+                        <option value="1to10">
+                            1% - 10%
+                        </option>
+
+                        <option value="11to20">
+                            11% - 20%
+                        </option>
+
+                        <option value="21to30">
+                            21% - 30%
+                        </option>
+
+                        <option value="over30">
+                            Trên 30%
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div class="add-product-row">
+
+            <button
+                id="addProductBtn"
+                class="primary-btn"
+                type="button"
+            >
+                + Thêm sản phẩm
+            </button>
+
+        </div>
+
+        <section
+            id="stateBox"
+            class="state-box"
+            hidden
+        ></section>
+
+        <section
+            id="tableWrapper"
+            class="table-card"
+            hidden
+        >
+
+            <div class="table-heading">
+
+                <div>
+
+                    <h2>
+                        Danh sách sản phẩm
+                    </h2>
+
+                    <p id="resultCount">
+                        0 sản phẩm
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="table-scroll">
+
+                <table class="product-table">
+
+                    <colgroup>
+
+                        <col class="col-stt">
+                        <col class="col-product">
+                        <col class="col-brand">
+                        <col class="col-price">
+                        <col class="col-discount">
+                        <col class="col-rating">
+                        <col class="col-review-count">
+                        <col class="col-actions">
+
+                    </colgroup>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>STT</th>
+
+                            <th>Sản phẩm</th>
+
+                            <th>Thương hiệu</th>
+
+                            <th>Giá hiện tại</th>
+
+                            <th>Giảm giá</th>
+
+                            <th>Đánh giá</th>
+
+                            <th>Lượt đánh giá</th>
+
+                            <th>Thao tác</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="productTableBody"></tbody>
+
+                </table>
+
+            </div>
+
+            <div class="pagination-row">
+
+                <span id="paginationInfo"></span>
+
+                <div
+                    id="pagination"
+                    class="pagination"
+                ></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <div
+        id="detailModal"
+        class="modal-overlay"
+        hidden
+    >
+
+        <div
+            class="modal detail-modal"
+            role="dialog"
+            aria-modal="true"
+        >
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2>
+                        Chi tiết sản phẩm
+                    </h2>
+
+                    <p>
+                        Thông tin sản phẩm và đánh giá của khách hàng
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="close-btn"
+                    data-close="detailModal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <section class="product-detail-section">
+
+                <div class="detail-section-heading">
+
+                    <div>
+                        <span class="detail-heading-small">
+                            THÔNG TIN
+                        </span>
+
+                        <h3>
+                            Thông tin sản phẩm
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div
+                    id="detailContent"
+                    class="detail-content"
+                ></div>
+
+            </section>
+
+            <section class="review-section">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <span class="detail-heading-small">
+                            ĐÁNH GIÁ
+                        </span>
+
+                        <h3>
+                            Tổng quan đánh giá
+                        </h3>
+
+                        <p>
+                            Tổng hợp đánh giá của khách hàng
+                        </p>
+
+                    </div>
+
+                    <strong id="reviewCountBadge">
+                        0
+                    </strong>
+
+                </div>
+
+                <div
+                    id="reviewSummary"
+                    class="review-summary"
+                ></div>
+
+            </section>
+
+            <section class="review-section review-list-section">
+
+                <div class="review-toolbar">
+
+                    <div>
+
+                        <h3>
+                            Đánh giá của khách hàng
+                        </h3>
+
+                        <p class="review-description">
+                            Chi tiết từng đánh giá
+                        </p>
+
+                    </div>
+
+                    <div class="review-filters">
+
+                        <select id="reviewRatingFilter">
+
+                            <option value="">
+                                Tất cả sao
+                            </option>
+
+                            <option value="5">
+                                5 sao
+                            </option>
+
+                            <option value="4">
+                                4 sao
+                            </option>
+
+                            <option value="3">
+                                3 sao
+                            </option>
+
+                            <option value="2">
+                                2 sao
+                            </option>
+
+                            <option value="1">
+                                1 sao
+                            </option>
+
+                        </select>
+
+                        <select id="reviewSort">
+
+                            <option value="newest">
+                                Mới nhất
+                            </option>
+
+                            <option value="oldest">
+                                Cũ nhất
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div
+                    id="detailReviews"
+                    class="review-list"
+                ></div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+    <div
+        id="productModal"
+        class="modal-overlay"
+        hidden
+    >
+
+        <div
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+        >
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2 id="productModalTitle">
+                        Thêm sản phẩm
+                    </h2>
+
+                    <p>
+                        Nhập thông tin sản phẩm cần quản lý
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="close-btn"
+                    data-close="productModal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <form
+                id="productForm"
+                class="product-form"
+            >
+
+                <div class="form-group">
+
+                    <label for="productBrand">
+                        Thương hiệu
+                    </label>
+
+                    <input
+                        id="productBrand"
+                        type="text"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group full">
+
+                    <label for="productName">
+                        Tên sản phẩm
+                    </label>
+
+                    <input
+                        id="productName"
+                        type="text"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="productListedPrice">
+                        Giá niêm yết
+                    </label>
+
+                    <input
+                        id="productListedPrice"
+                        type="number"
+                        min="0"
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="productDiscount">
+                        Giảm giá (%)
+                    </label>
+
+                    <input
+                        id="productDiscount"
+                        type="number"
+                        min="0"
+                        max="100"
+                        step="0.1"
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="productPrice">
+                        Giá hiện tại
+                    </label>
+
+                    <input
+                        id="productPrice"
+                        type="number"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="productSource">
+                        Nguồn
+                    </label>
+
+                    <input
+                        id="productSource"
+                        type="text"
+                        placeholder="Hasaki"
+                    >
+
+                </div>
+
+                <div class="form-actions full">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        data-close="productModal"
+                    >
+                        Hủy
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Lưu sản phẩm
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div
+        id="deleteModal"
+        class="modal-overlay"
+        hidden
+    >
+
+        <div
+            class="modal small-modal"
+            role="dialog"
+            aria-modal="true"
+        >
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2>
+                        Xóa sản phẩm
+                    </h2>
+
+                    <p>
+                        Sản phẩm sẽ bị xóa khỏi dữ liệu quản lý.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="close-btn"
+                    data-close="deleteModal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <p
+                id="deleteMessage"
+                class="delete-message"
+            ></p>
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    data-close="deleteModal"
+                >
+                    Hủy
+                </button>
+
+                <button
+                    type="button"
+                    id="confirmDeleteBtn"
+                    class="danger-btn"
+                >
+                    Xóa
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="tracuu.js"></script>
+
+</body>
+</html>

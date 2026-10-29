@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dự đoán | BeautyPrice Intelligence</title>
+
+    <link rel="stylesheet" href="dudoan.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                ✦
+            </div>
+
+            <div>
+                <h2>BeautyPrice</h2>
+                <span>INTELLIGENCE</span>
+            </div>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="dashboard.html"
+               class="menu-item">
+
+                <span>▣</span>
+                Tổng quan
+
+            </a>
+
+
+            <a href="phankhuc.html"
+               class="menu-item">
+
+                <span>◉</span>
+                Phân khúc
+
+            </a>
+
+
+            <a href="dudoan.html"
+               class="menu-item active">
+
+                <span>◈</span>
+                Dự đoán
+
+            </a>
+
+
+            <a href="tracuu.html"
+               class="menu-item">
+
+                <span>⌕</span>
+                Tra cứu dữ liệu
+
+            </a>
+
+
+            <a href="baocao.html"
+               class="menu-item">
+
+                <span>▤</span>
+                Báo cáo
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="user-box">
+
+                <div class="avatar"
+                     id="userAvatar">
+                    ?
+                </div>
+
+                <div>
+
+                    <strong id="userRole">
+                        Đang tải...
+                    </strong>
+
+                    <small id="userRoleText">
+                        Đang tải...
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <button type="button"
+                    class="logout-btn"
+                    onclick="logout()">
+
+                <span>↪</span>
+                Đăng xuất
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>
+                    Dự đoán giá sản phẩm
+                </h1>
+
+                <p>
+                    Hiển thị kết quả dự đoán giá và nhóm giá
+                    từ mô hình Supervised Machine Learning.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <section class="kpi-grid">
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-label">
+                    Số sản phẩm dự đoán
+                </div>
+
+                <div
+                    class="kpi-value"
+                    id="totalPredictions"
+                >
+                    338
+                </div>
+
+                <div class="kpi-description">
+                    Sản phẩm được mô hình dự đoán
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-label">
+                    Giá dự đoán trung bình
+                </div>
+
+                <div
+                    class="kpi-value"
+                    id="averagePredictedPrice"
+                >
+                    —
+                </div>
+
+                <div class="kpi-description">
+                    Mức giá trung bình từ mô hình
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-label">
+                    Nhóm giá phổ biến
+                </div>
+
+                <div
+                    class="kpi-value"
+                    id="popularPriceGroup"
+                >
+                    —
+                </div>
+
+                <div class="kpi-description">
+                    Nhóm có nhiều sản phẩm nhất
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-label">
+                    R²
+                </div>
+
+                <div
+                    class="kpi-value"
+                    id="r2Score"
+                >
+                    —
+                </div>
+
+                <div class="kpi-description">
+                    Mức độ giải thích của mô hình
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="content-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Giá thực tế và giá dự đoán
+                    </h2>
+
+                    <p>
+                        So sánh giá sản phẩm với kết quả từ mô hình
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="prediction-chart-wrapper">
+
+                <div
+                    id="predictionChart"
+                    class="prediction-chart"
+                >
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="section-block">
+
+            <div class="section-title">
+
+                <div>
+
+                    <h2>
+                        Phân bố nhóm giá dự đoán
+                    </h2>
+
+                    <p>
+                        Số lượng sản phẩm theo từng nhóm giá
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="priceGroupCards"
+                class="price-group-grid"
+            >
+            </div>
+
+        </section>
+
+
+        <section class="content-card">
+
+            <div class="card-header table-header">
+
+                <div>
+
+                    <h2>
+                        Kết quả dự đoán
+                    </h2>
+
+                    <p>
+                        Giá thực tế, giá dự đoán và nhóm giá
+                    </p>
+
+                </div>
+
+
+                <div class="table-filter">
+
+                    <label for="priceGroupFilter">
+                        Nhóm giá
+                    </label>
+
+
+                    <select id="priceGroupFilter">
+
+                        <option value="">
+                            Tất cả nhóm
+                        </option>
+
+                        <option value="Thấp">
+                            Giá thấp
+                        </option>
+
+                        <option value="Trung bình">
+                            Giá trung bình
+                        </option>
+
+                        <option value="Cao">
+                            Giá cao
+                        </option>
+
+                        <option value="Cao cấp">
+                            Giá cao cấp
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                STT
+                            </th>
+
+                            <th>
+                                Sản phẩm
+                            </th>
+
+                            <th>
+                                Thương hiệu
+                            </th>
+
+                            <th>
+                                Giá hiện tại
+                            </th>
+
+                            <th>
+                                Giá dự đoán
+                            </th>
+
+                            <th>
+                                Sai lệch
+                            </th>
+
+                            <th>
+                                Nhóm giá
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="predictionTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="7"
+                                class="loading"
+                            >
+                                Đang tải kết quả dự đoán...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <section class="content-card evaluation-section">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Đánh giá mô hình
+                    </h2>
+
+                    <p>
+                        Các chỉ số đánh giá hiệu quả mô hình Supervised ML
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="evaluation-grid">
+
+
+                <div class="evaluation-card">
+
+                    <div class="evaluation-name">
+                        MAE
+                    </div>
+
+                    <div
+                        class="evaluation-value"
+                        id="maeValue"
+                    >
+                        —
+                    </div>
+
+                    <p>
+                        Sai số tuyệt đối trung bình
+                    </p>
+
+                </div>
+
+
+                <div class="evaluation-card">
+
+                    <div class="evaluation-name">
+                        RMSE
+                    </div>
+
+                    <div
+                        class="evaluation-value"
+                        id="rmseValue"
+                    >
+                        —
+                    </div>
+
+                    <p>
+                        Căn bậc hai sai số bình phương trung bình
+                    </p>
+
+                </div>
+
+
+                <div class="evaluation-card">
+
+                    <div class="evaluation-name">
+                        R²
+                    </div>
+
+                    <div
+                        class="evaluation-value"
+                        id="evaluationR2"
+                    >
+                        —
+                    </div>
+
+                    <p>
+                        Hệ số xác định
+                    </p>
+
+                </div>
+
+
+                <div class="evaluation-card">
+
+                    <div class="evaluation-name">
+                        MAPE
+                    </div>
+
+                    <div
+                        class="evaluation-value"
+                        id="mapeValue"
+                    >
+                        —
+                    </div>
+
+                    <p>
+                        Sai số phần trăm tuyệt đối trung bình
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="content-card insight-section">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Phân tích & nhận định
+                    </h2>
+
+                    <p>
+                        Nhận định từ kết quả dự đoán
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="predictionInsight"
+                class="insight-content"
+            >
+                Đang phân tích...
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const role =
+                    sessionStorage.getItem(
+                        "beautyprice_role"
+                    );
+
+                const loggedIn =
+                    sessionStorage.getItem(
+                        "beautyprice_logged_in"
+                    );
+
+
+                if (
+                    loggedIn !== "true" ||
+                    !role
+                ) {
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                const userAvatar =
+                    document.getElementById(
+                        "userAvatar"
+                    );
+
+                const userRole =
+                    document.getElementById(
+                        "userRole"
+                    );
+
+                const userRoleText =
+                    document.getElementById(
+                        "userRoleText"
+                    );
+
+
+                if (
+                    role === "admin"
+                ) {
+
+                    userAvatar.textContent =
+                        "A";
+
+                    userRole.textContent =
+                        "ADMIN";
+
+                    userRoleText.textContent =
+                        "Quản trị viên";
+
+                }
+
+
+                else if (
+                    role === "user"
+                ) {
+
+                    userAvatar.textContent =
+                        "U";
+
+                    userRole.textContent =
+                        "USER";
+
+                    userRoleText.textContent =
+                        "Người dùng";
+
+                }
+
+
+                else {
+
+                    sessionStorage.clear();
+
+                    window.location.href =
+                        "login.html";
+
+                }
+
+            }
+        );
+
+
+        function logout() {
+
+            sessionStorage.removeItem(
+                "beautyprice_logged_in"
+            );
+
+            sessionStorage.removeItem(
+                "beautyprice_role"
+            );
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    </script>
+
+
+    <script src="dudoan.js"></script>
+
+</body>
+
+</html>

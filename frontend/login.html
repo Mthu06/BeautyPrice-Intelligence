@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Đăng nhập | BeautyPrice Intelligence</title>
+
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="login-box">
+
+            <div class="logo">
+                <div class="logo-icon">✦</div>
+                <div class="logo-text">
+                    <span>BEAUTYPRICE</span>
+                    <strong>INTELLIGENCE</strong>
+                </div>
+            </div>
+
+            <h1>Đăng nhập</h1>
+
+            <p class="subtitle">
+                Đăng nhập để truy cập hệ thống
+            </p>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label for="username">Tên đăng nhập</label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Nhập tên đăng nhập"
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Nhập mật khẩu"
+                            autocomplete="current-password"
+                        >
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="toggle-password"
+                        >
+                            👁
+                        </button>
+                    </div>
+                </div>
+
+                <p id="loginError" class="login-error"></p>
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                    class="login-button"
+                >
+                    Đăng nhập
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="login.js"></script>
+
+</body>
+</html>

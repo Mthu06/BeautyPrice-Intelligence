@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+.env
+
+backend/products.json
+backend/products_working.json
+backend/*.csv
+
+backend/ML/*.joblib
+backend/ML/*.pkl
+
+*.log
+.DS_Store
+Thumbs.db

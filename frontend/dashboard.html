@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BeautyPrice Intelligence</title>
+
+    <link rel="stylesheet" href="style.css">
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                ✦
+            </div>
+
+            <div>
+                <h2>BeautyPrice</h2>
+                <span>INTELLIGENCE</span>
+            </div>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="dashboard.html"
+               class="menu-item active">
+
+                <span>▣</span>
+                Tổng quan
+
+            </a>
+
+
+            <a href="phankhuc.html"
+               class="menu-item">
+
+                <span>◉</span>
+                Phân khúc
+
+            </a>
+
+
+            <a href="dudoan.html"
+               class="menu-item">
+
+                <span>◈</span>
+                Dự đoán
+
+            </a>
+
+
+            <a href="tracuu.html"
+               class="menu-item">
+
+                <span>⌕</span>
+                Tra cứu dữ liệu
+
+            </a>
+
+
+            <a href="baocao.html"
+               class="menu-item">
+
+                <span>▤</span>
+                Báo cáo
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="user-box">
+
+                <div class="avatar"
+                     id="userAvatar">
+                    ?
+                </div>
+
+                <div>
+
+                    <strong id="userRole">
+                        Đang tải...
+                    </strong>
+
+                    <small id="userRoleText">
+                        Đang tải...
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <button type="button"
+                    class="logout-btn"
+                    onclick="logout()">
+
+                <span>↪</span>
+                Đăng xuất
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="header">
+
+            <div>
+
+                <h1>
+                    Tổng quan thị trường
+                </h1>
+
+                <p>
+                    Theo dõi và phân tích dữ liệu mỹ phẩm
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <section class="filter-box">
+
+            <div class="filter-title">
+
+                <strong>
+                    Bộ lọc dữ liệu
+                </strong>
+
+                <button type="button"
+                        class="reset-btn">
+
+                    Đặt lại
+
+                </button>
+
+            </div>
+
+
+            <div class="filters">
+
+                <div class="filter-group">
+
+                    <label>
+                        Thương hiệu
+                    </label>
+
+                    <select id="brandFilter">
+
+                        <option value="">
+                            Tất cả thương hiệu
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label>
+                        Khoảng giá
+                    </label>
+
+                    <select id="priceFilter">
+
+                        <option value="">
+                            Tất cả mức giá
+                        </option>
+
+                        <option value="under100">
+                            Dưới 100.000đ
+                        </option>
+
+                        <option value="100to300">
+                            100.000đ - 300.000đ
+                        </option>
+
+                        <option value="300to500">
+                            300.000đ - 500.000đ
+                        </option>
+
+                        <option value="over500">
+                            Trên 500.000đ
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label>
+                        Giảm giá
+                    </label>
+
+                    <select id="discountFilter">
+
+                        <option value="">
+                            Tất cả
+                        </option>
+
+                        <option value="discount0">
+                            0%
+                        </option>
+
+                        <option value="discount1to10">
+                            1% - 10%
+                        </option>
+
+                        <option value="discount11to20">
+                            11% - 20%
+                        </option>
+
+                        <option value="discount21to30">
+                            21% - 30%
+                        </option>
+
+                        <option value="discountOver30">
+                            Trên 30%
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="kpi-grid">
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    ▦
+                </div>
+
+                <div>
+
+                    <span>
+                        Tổng sản phẩm
+                    </span>
+
+                    <h2 class="kpi-value">
+                        0
+                    </h2>
+
+                    <small class="kpi-description">
+                        Tổng số sản phẩm
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    ◉
+                </div>
+
+                <div>
+
+                    <span>
+                        Số thương hiệu
+                    </span>
+
+                    <h2 class="kpi-value">
+                        0
+                    </h2>
+
+                    <small class="kpi-description">
+                        Thương hiệu trong dữ liệu
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    ₫
+                </div>
+
+                <div>
+
+                    <span>
+                        Giá trung bình
+                    </span>
+
+                    <h2 class="kpi-value">
+                        0đ
+                    </h2>
+
+                    <small class="kpi-description">
+                        Giá hiện tại
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    %
+                </div>
+
+                <div>
+
+                    <span>
+                        Đang giảm giá
+                    </span>
+
+                    <h2 class="kpi-value">
+                        0
+                    </h2>
+
+                    <small class="kpi-description">
+                        Trong tổng số 0 sản phẩm
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="chart-grid">
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Top thương hiệu
+                        </h3>
+
+                        <p>
+                            Số lượng sản phẩm theo thương hiệu
+                        </p>
+
+                    </div>
+
+                    <button type="button"
+                            class="more-btn">
+
+                        •••
+
+                    </button>
+
+                </div>
+
+
+                <div class="brand-list">
+
+                    <div class="empty-state">
+                        Đang tải dữ liệu...
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Phân bố mức giá
+                        </h3>
+
+                        <p>
+                            Số lượng sản phẩm theo khoảng giá
+                        </p>
+
+                    </div>
+
+                    <button type="button"
+                            class="more-btn">
+
+                        •••
+
+                    </button>
+
+                </div>
+
+
+                <div class="price-chart">
+
+                    <div class="price-column">
+
+                        <div class="column-value">
+                            0
+                        </div>
+
+                        <div class="column"
+                             style="height:0px">
+                        </div>
+
+                        <span>
+                            &lt;100k
+                        </span>
+
+                    </div>
+
+
+                    <div class="price-column">
+
+                        <div class="column-value">
+                            0
+                        </div>
+
+                        <div class="column"
+                             style="height:0px">
+                        </div>
+
+                        <span>
+                            100–300k
+                        </span>
+
+                    </div>
+
+
+                    <div class="price-column">
+
+                        <div class="column-value">
+                            0
+                        </div>
+
+                        <div class="column"
+                             style="height:0px">
+                        </div>
+
+                        <span>
+                            300–500k
+                        </span>
+
+                    </div>
+
+
+                    <div class="price-column">
+
+                        <div class="column-value">
+                            0
+                        </div>
+
+                        <div class="column"
+                             style="height:0px">
+                        </div>
+
+                        <span>
+                            &gt;500k
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="bottom-grid">
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Tình trạng giảm giá
+                        </h3>
+
+                        <p>
+                            Phân bố sản phẩm theo mức giảm
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="discount-list">
+
+                    <div>
+
+                        <span>
+                            0%
+                        </span>
+
+                        <strong>
+                            0 sản phẩm
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            1% – 10%
+                        </span>
+
+                        <strong>
+                            0 sản phẩm
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            11% – 20%
+                        </span>
+
+                        <strong>
+                            0 sản phẩm
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            21% – 30%
+                        </span>
+
+                        <strong>
+                            0 sản phẩm
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Trên 30%
+                        </span>
+
+                        <strong>
+                            0 sản phẩm
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card insight-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Insight nhanh
+                        </h3>
+
+                        <p>
+                            Tóm tắt từ dữ liệu hiện tại
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="insight-list">
+
+                    <div class="insight">
+
+                        <div class="insight-number">
+                            01
+                        </div>
+
+                        <p>
+                            Đang tải dữ liệu...
+                        </p>
+
+                    </div>
+
+
+                    <div class="insight">
+
+                        <div class="insight-number">
+                            02
+                        </div>
+
+                        <p>
+                            Đang tải dữ liệu...
+                        </p>
+
+                    </div>
+
+
+                    <div class="insight">
+
+                        <div class="insight-number">
+                            03
+                        </div>
+
+                        <p>
+                            Đang tải dữ liệu...
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            BeautyPrice Intelligence
+        </footer>
+
+
+    </main>
+
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const role =
+                    sessionStorage.getItem(
+                        "beautyprice_role"
+                    );
+
+                const loggedIn =
+                    sessionStorage.getItem(
+                        "beautyprice_logged_in"
+                    );
+
+
+                if (
+                    loggedIn !== "true" ||
+                    !role
+                ) {
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                const userAvatar =
+                    document.getElementById(
+                        "userAvatar"
+                    );
+
+                const userRole =
+                    document.getElementById(
+                        "userRole"
+                    );
+
+                const userRoleText =
+                    document.getElementById(
+                        "userRoleText"
+                    );
+
+
+                if (
+                    role === "admin"
+                ) {
+
+                    userAvatar.textContent =
+                        "A";
+
+                    userRole.textContent =
+                        "ADMIN";
+
+                    userRoleText.textContent =
+                        "Quản trị viên";
+
+                }
+
+
+                else if (
+                    role === "user"
+                ) {
+
+                    userAvatar.textContent =
+                        "U";
+
+                    userRole.textContent =
+                        "USER";
+
+                    userRoleText.textContent =
+                        "Người dùng";
+
+                }
+
+
+                else {
+
+                    sessionStorage.clear();
+
+                    window.location.href =
+                        "login.html";
+
+                }
+
+            }
+        );
+
+
+        function logout() {
+
+            sessionStorage.removeItem(
+                "beautyprice_logged_in"
+            );
+
+            sessionStorage.removeItem(
+                "beautyprice_role"
+            );
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    </script>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
